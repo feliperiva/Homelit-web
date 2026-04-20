@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOMELIT Export Legacy</title>
+    <style>
+      body { font-family: Arial, sans-serif; padding: 32px; background: #f6efe4; color: #2b241e; }
+      button { padding: 14px 18px; border: 0; border-radius: 12px; background: #b63a2b; color: white; font-weight: 700; cursor: pointer; }
+      pre { white-space: pre-wrap; background: #fffaf3; padding: 16px; border-radius: 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Exportar propiedades del sistema actual</h1>
+    <p>Abre esta pagina desde el mismo entorno donde usabas el panel antiguo y descarga un respaldo JSON.</p>
+    <button id="export-button" type="button">Descargar respaldo</button>
+    <pre id="status"></pre>
+    <script src="./legacy-storage.js"></script>
+    <script>
+      const status = document.getElementById("status");
+      document.getElementById("export-button").addEventListener("click", async () => {
+        const properties = await getLegacyStoredProperties();
+        status.textContent = `Se encontraron ${properties.length} propiedades.`;
+        const blob = new Blob([JSON.stringify(properties, null, 2)], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "homelit-respaldo-legacy.json";
+        link.click();
+        URL.revokeObjectURL(link.href);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOMELIT Admin</title>
+    <link rel="stylesheet" href="./admin.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-login" id="login-view">
+        <div class="admin-card">
+          <img class="admin-logo" src="./assets/homelit-logo.png" alt="Logo HOMELIT" />
+          <p class="admin-kicker">Panel privado</p>
+          <h1>Administrar propiedades</h1>
+          <p class="admin-copy">
+            Solo para uso interno de HOMELIT. Desde aquí pueden crear, editar y borrar
+            propiedades con sus fotos.
+          </p>
+
+          <form id="login-form" class="stack">
+            <label>
+              Usuario
+              <input id="login-user" type="text" autocomplete="username" required />
+            </label>
+            <label>
+              Contraseña
+              <input id="login-password" type="password" autocomplete="current-password" required />
+            </label>
+            <button type="submit" class="primary-button">Entrar al panel</button>
+          </form>
+
+          <p class="helper-text" id="login-message"></p>
+        </div>
+      </section>
+
+      <section class="admin-panel hidden" id="panel-view">
+        <header class="panel-topbar">
+          <div>
+            <p class="admin-kicker">Panel privado</p>
+            <h2>Propiedades HOMELIT</h2>
+          </div>
+          <div class="panel-actions">
+            <button class="ghost-button" type="button" id="logout-button">Cerrar sesión</button>
+          </div>
+        </header>
+
+        <div class="panel-layout">
+          <section class="admin-card">
+            <div class="card-heading">
+              <div>
+                <p class="admin-kicker">Formulario</p>
+                <h3 id="form-title">Nueva propiedad</h3>
+              </div>
+              <button class="ghost-button" type="button" id="reset-form-button">Limpiar</button>
+            </div>
+
+            <form id="property-form" class="admin-form">
+              <input id="property-id" type="hidden" />
+
+              <label>
+                Título
+                <input id="property-title" type="text" required />
+              </label>
+
+              <div class="split">
+                <label>
+                  País
+                  <select id="property-country" required>
+                    <option value="Chile">Chile</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Perú">Perú</option>
+                  </select>
+                </label>
+
+                <label>
+                  Tipo
+                  <select id="property-type" required>
+                    <option value="Casa">Casa</option>
+                    <option value="Departamento">Departamento</option>
+                    <option value="Oficina">Oficina</option>
+                    <option value="Agrícola">Agrícola</option>
+                    <option value="Bodega">Bodega</option>
+                    <option value="Terreno">Terreno</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                Ubicación
+                <input id="property-location" type="text" placeholder="Comuna, ciudad o sector" required />
+              </label>
+
+              <div class="split">
+                <label>
+                  Operación
+                  <select id="property-operation" required>
+                    <option value="Venta">Venta</option>
+                    <option value="Arriendo">Arriendo</option>
+                  </select>
+                </label>
+
+                <label>
+                  Moneda
+                  <select id="property-currency" required>
+                    <option value="UF">UF</option>
+                    <option value="CLP">Peso chileno</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="triple">
+                <label>
+                  Precio
+                  <input id="property-price" type="number" min="0" required />
+                </label>
+
+                <label>
+                  Dormitorios
+                  <input id="property-bedrooms" type="number" min="0" value="0" />
+                </label>
+
+                <label>
+                  Baños
+                  <input id="property-bathrooms" type="number" min="0" value="0" />
+                </label>
+              </div>
+
+              <label>
+                Superficie
+                <input id="property-area" type="text" placeholder="Ejemplo: 120 m²" />
+              </label>
+
+              <label>
+                Superficie útil
+                <input id="property-usable-area" type="text" placeholder="Ejemplo: 98 m²" />
+              </label>
+
+              <label>
+                Descripción
+                <textarea id="property-description" rows="4" placeholder="Resumen breve de la propiedad"></textarea>
+              </label>
+
+              <label>
+                Fotos
+                <input id="property-images" type="file" accept="image/*" multiple />
+              </label>
+
+              <div class="helper-text">
+                Puedes subir varias fotos. La primera se mostrará como imagen principal en la web pública.
+              </div>
+
+              <p class="helper-text" id="image-warning-message"></p>
+
+              <div class="upload-summary" id="upload-summary">
+                <strong id="upload-count">0 archivos cargados</strong>
+                <div class="upload-file-list" id="upload-file-list"></div>
+              </div>
+
+              <div class="image-preview-grid" id="image-preview-grid"></div>
+
+              <button type="submit" class="primary-button">Guardar propiedad</button>
+              <p class="helper-text" id="form-message"></p>
+            </form>
+          </section>
+
+          <section class="admin-card">
+            <div class="card-heading">
+              <div>
+                <p class="admin-kicker">Listado</p>
+                <h3>Propiedades cargadas</h3>
+              </div>
+              <div class="panel-actions">
+                <label class="ghost-button import-button">
+                  Importar respaldo
+                  <input id="import-backup-file" type="file" accept="application/json" hidden />
+                </label>
+                <button class="ghost-button" type="button" id="reset-seed-button">Restaurar ejemplo</button>
+              </div>
+            </div>
+
+            <div class="property-admin-list" id="property-admin-list"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="./storage.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOMELIT Propiedades</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="topbar">
+          <a class="brand" href="#inicio" aria-label="Inicio HOMELIT">
+            <img
+              class="brand-logo"
+              src="./assets/homelit-logo.png"
+              alt="Logo HOMELIT"
+            />
+          </a>
+
+          <div class="nav-links">
+            <div class="nav-dropdown">
+              <button class="nav-dropdown-toggle" type="button" id="nav-properties-toggle">
+                Propiedades
+              </button>
+              <div class="nav-dropdown-panel" id="nav-properties-panel">
+                <div class="nav-dropdown-grid">
+                  <label class="nav-type-field">
+                    Tipo de propiedad
+                    <select id="nav-type-filter">
+                      <option value="">Seleccionar</option>
+                      <option value="Casa">Casa</option>
+                      <option value="Departamento">Departamento</option>
+                      <option value="Oficina">Oficina</option>
+                      <option value="Agrícola">Agrícola</option>
+                      <option value="Bodega">Bodega</option>
+                      <option value="Terreno">Terreno</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+          </div>
+        </nav>
+
+        <div class="hero-content" id="inicio">
+          <h1>Encuentra tu propiedad ideal</h1>
+          <p class="hero-copy">
+            Busca por ubicación, operación, rango de precio y tipo de
+            propiedad en una experiencia simple y elegante.
+          </p>
+
+          <section class="search-card" aria-label="Buscador principal">
+            <div class="search-tabs">
+              <button class="filter-tab is-active" type="button" data-panel="location-panel">
+                Ubicación
+              </button>
+              <button class="filter-tab" type="button" data-panel="operation-panel">
+                Operación y precio
+              </button>
+              <button class="filter-tab" type="button" data-panel="type-panel">
+                Tipo de propiedad
+              </button>
+              <button class="search-trigger" type="button" id="run-search" aria-label="Buscar propiedades">
+                <span>Buscar</span>
+              </button>
+            </div>
+
+            <div class="search-panels">
+              <div class="filter-panel is-visible" id="location-panel">
+                <label>
+                  País
+                  <select id="country-filter">
+                    <option value="">Todos</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Perú">Perú</option>
+                  </select>
+                </label>
+
+                <label class="field-grow">
+                  Escribir ubicación
+                  <div class="location-autocomplete">
+                    <input
+                      id="location-filter"
+                      type="text"
+                      placeholder="Comuna, ciudad o sector"
+                      autocomplete="off"
+                    />
+                    <div class="location-suggestions hidden" id="location-suggestions"></div>
+                  </div>
+                </label>
+              </div>
+
+              <div class="filter-panel" id="operation-panel">
+                <label>
+                  Operación
+                  <select id="operation-filter">
+                    <option value="">Todas</option>
+                    <option value="Venta">Venta</option>
+                    <option value="Arriendo">Arriendo</option>
+                  </select>
+                </label>
+
+                <label>
+                  Moneda
+                  <select id="currency-filter">
+                    <option value="">UF y CLP</option>
+                    <option value="UF">UF</option>
+                    <option value="CLP">Peso chileno</option>
+                  </select>
+                </label>
+
+                <label>
+                  Precio mínimo
+                  <input id="min-price-filter" type="number" min="0" placeholder="Desde" />
+                </label>
+
+                <label>
+                  Precio máximo
+                  <input id="max-price-filter" type="number" min="0" placeholder="Hasta" />
+                </label>
+              </div>
+
+              <div class="filter-panel" id="type-panel">
+                <label class="field-grow">
+                  Tipo de propiedad
+                  <select id="type-filter">
+                    <option value="">Todas</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Departamento">Departamento</option>
+                    <option value="Oficina">Oficina</option>
+                    <option value="Agrícola">Agrícola</option>
+                    <option value="Bodega">Bodega</option>
+                    <option value="Terreno">Terreno</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </section>
+        </div>
+      </header>
+
+      <main>
+        <section class="results-section" id="propiedades">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Resultados</p>
+              <h2>Propiedades destacadas</h2>
+            </div>
+            <p id="results-count">0 propiedades encontradas</p>
+          </div>
+
+          <div class="property-grid" id="property-grid"></div>
+        </section>
+
+        <section class="services-section" id="servicios">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Servicios</p>
+              <h2>Acompañamos todo el proceso</h2>
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <article>
+              <h3>Compra y venta</h3>
+              <p>Asesoría comercial para encontrar oportunidades y cerrar con seguridad.</p>
+            </article>
+            <article>
+              <h3>Arriendos</h3>
+              <p>Gestión enfocada en propiedades urbanas, inversión y administración.</p>
+            </article>
+            <article>
+              <h3>Evaluación</h3>
+              <p>Orientación sobre precio de mercado, presentación y posicionamiento.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" id="contacto">
+        <div>
+          <strong>HOMELIT</strong>
+          <p>Tu próxima vitrina digital para mostrar y vender propiedades.</p>
+        </div>
+        <div class="footer-note">
+          <span>Contacto</span>
+          <a href="mailto:homelitcl.@gmail.com">homelitcl.@gmail.com</a>
+          <a href="https://wa.me/56968673415">+56 9 6867 3415</a>
+        </div>
+      </footer>
+    </div>
+
+    <a
+      class="floating-whatsapp"
+      href="https://wa.me/56968673415"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribir a HOMELIT por WhatsApp"
+    >
+      <span class="floating-whatsapp-ring"></span>
+      <span class="floating-whatsapp-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" role="img">
+          <path
+            d="M19.05 4.94A9.8 9.8 0 0 0 12.04 2C6.62 2 2.2 6.42 2.2 11.84c0 1.73.45 3.43 1.31 4.93L2 22l5.39-1.41a9.8 9.8 0 0 0 4.65 1.19h.01c5.42 0 9.84-4.42 9.84-9.84a9.75 9.75 0 0 0-2.84-7zM12.05 20.1h-.01a8.1 8.1 0 0 1-4.12-1.13l-.3-.18-3.2.84.86-3.12-.2-.32a8.08 8.08 0 0 1-1.24-4.35c0-4.48 3.65-8.13 8.14-8.13a8.05 8.05 0 0 1 5.77 2.39 8.07 8.07 0 0 1 2.37 5.75c0 4.48-3.65 8.13-8.13 8.13zm4.46-6.1c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.62-1.17-1.39-1.31-1.63-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.8-.19-.46-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.31.98 2.47c.12.16 1.68 2.56 4.07 3.59.57.25 1.02.4 1.37.51.58.18 1.11.15 1.53.09.47-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"
+            fill="currentColor"
+          />
+        </svg>
+      </span>
+      <span class="floating-whatsapp-label">WhatsApp</span>
+    </a>
+
+    <div class="property-modal hidden" id="property-modal" aria-hidden="true">
+      <div class="property-modal-backdrop" id="property-modal-backdrop"></div>
+      <div class="property-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="property-modal-close" type="button" id="property-modal-close" aria-label="Cerrar ficha">
+          ×
+        </button>
+
+        <div class="property-modal-grid">
+          <section class="property-gallery">
+            <div class="property-gallery-stage">
+              <button class="gallery-arrow gallery-arrow-left" type="button" id="modal-prev-image" aria-label="Foto anterior">
+                ‹
+              </button>
+              <img class="property-gallery-main" id="modal-main-image" src="" alt="" />
+              <button class="gallery-arrow gallery-arrow-right" type="button" id="modal-next-image" aria-label="Foto siguiente">
+                ›
+              </button>
+            </div>
+            <div class="property-gallery-thumbs" id="modal-thumbs"></div>
+          </section>
+
+          <section class="property-detail">
+            <div class="property-meta" id="modal-badges"></div>
+            <h2 id="modal-title"></h2>
+            <p class="property-location" id="modal-location"></p>
+            <p class="property-price" id="modal-price"></p>
+            <div class="property-detail-features" id="modal-features"></div>
+            <p class="property-detail-description" id="modal-description"></p>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="./storage.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
