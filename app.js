@@ -272,18 +272,19 @@ function renderProperties(list) {
 
   grid.innerHTML = list
     .map((property) => {
-      const mainImage = property.images[0] || "./assets/hero-property.svg";
+      const images = Array.isArray(property.images) ? property.images : [];
+      const mainImage = images[0] || "./assets/hero-property.svg";
       const featureLine = getFeatureLine(property);
 
       return `
-        <article class="property-card" data-property-id="${property.id}">
+        <a class="property-card" href="./propiedad.html?id=${property.id}" data-property-id="${property.id}">
           <img src="${mainImage}" alt="${property.title}" />
           <div class="property-body">
             <div class="property-meta">
               <span class="badge">${property.operation}</span>
               <span class="badge">${property.type}</span>
               <span class="badge">${property.currency}</span>
-              <span class="badge">${property.images.length} foto(s)</span>
+              <span class="badge">${images.length} foto(s)</span>
             </div>
             <h3>${property.title}</h3>
             <p class="property-location">${property.location}, ${property.country}</p>
@@ -291,21 +292,10 @@ function renderProperties(list) {
             ${featureLine ? `<div class="property-features"><span>${featureLine}</span></div>` : ""}
             ${property.description ? `<p class="property-description">${getShortDescription(property.description)}</p>` : ""}
           </div>
-        </article>
+        </a>
       `;
     })
     .join("");
-
-  grid.querySelectorAll(".property-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      const propertyId = Number(card.dataset.propertyId);
-      const selectedProperty = properties.find((property) => property.id === propertyId);
-
-      if (selectedProperty) {
-        openPropertyModal(selectedProperty);
-      }
-    });
-  });
 }
 
 function clearMainFilters() {

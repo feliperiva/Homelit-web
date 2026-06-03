@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Propiedad HOMELIT</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell property-page-shell">
+      <header class="property-topbar">
+        <a class="brand property-brand" href="./index.html" aria-label="Volver al inicio HOMELIT">
+          <img class="brand-logo" src="./assets/homelit-logo.png" alt="Logo HOMELIT" />
+        </a>
+
+        <nav class="property-page-nav" aria-label="Navegación de propiedad">
+          <a href="./index.html#propiedades">Propiedades</a>
+          <a href="./index.html#contacto">Contacto</a>
+        </nav>
+      </header>
+
+      <main class="property-page">
+        <a class="property-back-link" href="./index.html#propiedades">Volver a propiedades</a>
+
+        <section class="property-page-layout hidden" id="property-content">
+          <div class="property-page-gallery">
+            <div class="property-gallery-stage">
+              <button class="gallery-arrow gallery-arrow-left" type="button" id="detail-prev-image" aria-label="Foto anterior">
+                ‹
+              </button>
+              <img class="property-page-main-image" id="detail-main-image" src="" alt="" />
+              <button class="gallery-arrow gallery-arrow-right" type="button" id="detail-next-image" aria-label="Foto siguiente">
+                ›
+              </button>
+            </div>
+            <div class="property-gallery-thumbs" id="detail-thumbs"></div>
+          </div>
+
+          <article class="property-page-detail">
+            <div class="property-meta" id="detail-badges"></div>
+            <h1 id="detail-title"></h1>
+            <p class="property-location" id="detail-location"></p>
+            <p class="property-price" id="detail-price"></p>
+            <div class="property-detail-features" id="detail-features"></div>
+            <p class="property-detail-description" id="detail-description"></p>
+            <a class="property-contact-button" id="detail-whatsapp" href="https://wa.me/56968673415" target="_blank" rel="noopener noreferrer">
+              Consultar por esta propiedad
+            </a>
+          </article>
+        </section>
+
+        <section class="empty-state hidden" id="property-empty">
+          <h1>Propiedad no encontrada</h1>
+          <p>Puede que esta propiedad ya no esté disponible o que el enlace esté incompleto.</p>
+          <a class="property-contact-button" href="./index.html#propiedades">Ver propiedades</a>
+        </section>
+      </main>
+
+      <footer class="footer property-page-footer" id="contacto">
+        <div>
+          <strong>HOMELIT</strong>
+          <p>Tu próxima vitrina digital para mostrar y vender propiedades.</p>
+        </div>
+        <div class="footer-note">
+          <span>Contacto</span>
+          <a href="mailto:homelitcl.@gmail.com">homelitcl.@gmail.com</a>
+          <a href="https://wa.me/56968673415">+56 9 6867 3415</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="./storage.js"></script>
+    <script src="./propiedad.js"></script>
+  </body>
+</html>
