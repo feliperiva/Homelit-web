@@ -7,23 +7,7 @@ const panels = document.querySelectorAll(".filter-panel");
 const runSearchButton = document.getElementById("run-search");
 const navDropdown = document.querySelector(".nav-dropdown");
 const navToggle = document.getElementById("nav-properties-toggle");
-const propertyModal = document.getElementById("property-modal");
-const propertyModalBackdrop = document.getElementById("property-modal-backdrop");
-const propertyModalClose = document.getElementById("property-modal-close");
-const modalMainImage = document.getElementById("modal-main-image");
-const modalThumbs = document.getElementById("modal-thumbs");
-const modalPrevImage = document.getElementById("modal-prev-image");
-const modalNextImage = document.getElementById("modal-next-image");
-const modalBadges = document.getElementById("modal-badges");
-const modalTitle = document.getElementById("modal-title");
-const modalLocation = document.getElementById("modal-location");
-const modalPrice = document.getElementById("modal-price");
-const modalFeatures = document.getElementById("modal-features");
-const modalDescription = document.getElementById("modal-description");
 const locationSuggestions = document.getElementById("location-suggestions");
-let activeModalImages = [];
-let activeModalIndex = 0;
-let activeModalTitle = "";
 let locationOptions = [];
 
 const filters = {
@@ -99,24 +83,6 @@ document.addEventListener("click", (event) => {
 
   if (event.target !== filters.location && !locationSuggestions.contains(event.target)) {
     hideLocationSuggestions();
-  }
-});
-
-propertyModalBackdrop.addEventListener("click", closePropertyModal);
-propertyModalClose.addEventListener("click", closePropertyModal);
-modalPrevImage.addEventListener("click", () => stepModalGallery(-1));
-modalNextImage.addEventListener("click", () => stepModalGallery(1));
-document.addEventListener("keydown", (event) => {
-  if (!propertyModal.classList.contains("hidden") && event.key === "ArrowLeft") {
-    stepModalGallery(-1);
-  }
-
-  if (!propertyModal.classList.contains("hidden") && event.key === "ArrowRight") {
-    stepModalGallery(1);
-  }
-
-  if (event.key === "Escape") {
-    closePropertyModal();
   }
 });
 
@@ -311,97 +277,6 @@ function clearMainFilters() {
 
 function applyFilters() {
   renderProperties(properties.filter(matchesFilters));
-}
-
-function openPropertyModal(property) {
-  const images = property.images.length ? property.images : ["./assets/hero-property.svg"];
-  const featureItems = [];
-
-  if (property.type) {
-    featureItems.push(`Tipo: ${property.type}`);
-  }
-
-  if (property.operation) {
-    featureItems.push(`Operación: ${property.operation}`);
-  }
-
-  if (property.country) {
-    featureItems.push(`País: ${property.country}`);
-  }
-
-  if (property.bedrooms > 0) {
-    featureItems.push(`Dormitorios: ${property.bedrooms}`);
-  }
-
-  if (property.bathrooms > 0) {
-    featureItems.push(`Baños: ${property.bathrooms}`);
-  }
-
-  if (property.area) {
-    featureItems.push(`Superficie: ${property.area}`);
-  }
-
-  if (property.usableArea) {
-    featureItems.push(`Superficie útil: ${property.usableArea}`);
-  }
-
-  modalBadges.innerHTML = `
-    <span class="badge">${property.operation}</span>
-    <span class="badge">${property.type}</span>
-    <span class="badge">${property.currency}</span>
-    <span class="badge">${images.length} foto(s)</span>
-  `;
-  modalTitle.textContent = property.title;
-  modalLocation.textContent = `${property.location}, ${property.country}`;
-  modalPrice.textContent = formatPrice(property.currency, property.price);
-  modalDescription.textContent = property.description || "Sin descripción disponible.";
-  modalFeatures.innerHTML = featureItems.map((item) => `<span>${item}</span>`).join("");
-
-  activeModalImages = images;
-  activeModalIndex = 0;
-  activeModalTitle = property.title;
-  renderModalGallery();
-
-  propertyModal.classList.remove("hidden");
-  propertyModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function renderModalGallery() {
-  modalMainImage.src = activeModalImages[activeModalIndex];
-  modalMainImage.alt = activeModalTitle;
-  modalThumbs.innerHTML = activeModalImages
-    .map(
-      (image, index) => `
-        <button type="button" class="${index === activeModalIndex ? "is-active" : ""}" data-thumb-index="${index}">
-          <img src="${image}" alt="${activeModalTitle} foto ${index + 1}" />
-        </button>
-      `,
-    )
-    .join("");
-
-  modalThumbs.querySelectorAll("button").forEach((button) => {
-    button.addEventListener("click", () => {
-      activeModalIndex = Number(button.dataset.thumbIndex);
-      renderModalGallery();
-    });
-  });
-}
-
-function stepModalGallery(direction) {
-  if (!activeModalImages.length) {
-    return;
-  }
-
-  activeModalIndex =
-    (activeModalIndex + direction + activeModalImages.length) % activeModalImages.length;
-  renderModalGallery();
-}
-
-function closePropertyModal() {
-  propertyModal.classList.add("hidden");
-  propertyModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
 }
 
 initPage();

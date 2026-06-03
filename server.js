@@ -431,8 +431,16 @@ function serveFile(res, filepath) {
       ".jpeg": "image/jpeg",
       ".webp": "image/webp"
     }[extension] || "application/octet-stream";
+  const headers = {
+    "Content-Type": contentType
+  };
 
-  res.writeHead(200, { "Content-Type": contentType });
+  if ([".html", ".css", ".js", ".json"].includes(extension)) {
+    headers["Cache-Control"] = "no-store, no-cache, must-revalidate";
+    headers.Pragma = "no-cache";
+  }
+
+  res.writeHead(200, headers);
   fs.createReadStream(filepath).pipe(res);
 }
 
