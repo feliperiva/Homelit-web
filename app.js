@@ -1,7 +1,6 @@
 let properties = [];
 
 const grid = document.getElementById("property-grid");
-const resultsCount = document.getElementById("results-count");
 const tabs = document.querySelectorAll(".filter-tab");
 const panels = document.querySelectorAll(".filter-panel");
 const runSearchButton = document.getElementById("run-search");
@@ -224,8 +223,6 @@ function getShortDescription(description) {
 }
 
 function renderProperties(list) {
-  resultsCount.textContent = `${list.length} propiedades encontradas`;
-
   if (!list.length) {
     grid.innerHTML = `
       <div class="empty-state">
