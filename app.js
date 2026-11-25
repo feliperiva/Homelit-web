@@ -1,6 +1,7 @@
 let properties = [];
 
 const grid = document.getElementById("property-grid");
+const resultsCount = document.getElementById("results-count");
 const tabs = document.querySelectorAll(".filter-tab");
 const panels = document.querySelectorAll(".filter-panel");
 const runSearchButton = document.getElementById("run-search");
@@ -223,6 +224,8 @@ function getShortDescription(description) {
 }
 
 function renderProperties(list) {
+  updateResultsCount(list.length);
+
   if (!list.length) {
     grid.innerHTML = `
       <div class="empty-state">
@@ -259,6 +262,17 @@ function renderProperties(list) {
       `;
     })
     .join("");
+}
+
+function updateResultsCount(filteredCount) {
+  const hasActiveFilters = Object.values(filters).some((field) => field.value.trim());
+
+  if (!hasActiveFilters) {
+    resultsCount.textContent = "215 propiedades encontradas";
+    return;
+  }
+
+  resultsCount.textContent = `${filteredCount} ${filteredCount === 1 ? "propiedad encontrada" : "propiedades encontradas"}`;
 }
 
 function clearMainFilters() {
